@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.ribbon.eureka.ConditionalOnRibbonAndEur
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @SpringBootApplication
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @EnableZuulProxy
 public class GatewayApplication {
 
