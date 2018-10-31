@@ -1,5 +1,6 @@
 package com.web.resourceserver.controller;
 
+import com.web.resourceserver.model.Dictionary;
 import com.web.resourceserver.model.Image;
 import com.web.resourceserver.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,28 @@ public class ImageController {
     @PostMapping("/create")
     private ResponseEntity<String> create(@RequestBody Image image) {
         return ResponseEntity.status(HttpStatus.CREATED).body(imageService.create(image).getPath());
+    }
+
+    @PostMapping("/params-create")
+    private ResponseEntity<String> create(@RequestParam String content,
+                                          @RequestParam String altRu, @RequestParam String altUa, @RequestParam String altEn,
+                                          @RequestParam String titleRu, @RequestParam String titleUa, @RequestParam String titleEn) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                imageService.create(new Image()
+                        .setAlt(
+                                new Dictionary()
+                                        .setValueEn(altEn)
+                                        .setValueRu(altRu)
+                                        .setValueUa(altUa)
+                        )
+                        .setTitle(
+                                new Dictionary()
+                                        .setValueEn(titleEn)
+                                        .setValueRu(titleRu)
+                                        .setValueUa(titleUa)
+                        )
+                        .setContent(content)
+                ).getPath());
     }
 
     @PostMapping("/update")

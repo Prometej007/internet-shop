@@ -1,26 +1,23 @@
-package com.web.productservice.model;
+package com.web.productservice.dto;
 
+import com.web.productservice.model.Category;
+import com.web.productservice.model.Dictionary;
+import com.web.productservice.model.Materials;
+import com.web.productservice.model.Product;
 import com.web.productservice.model.enums.SoftnessType;
 import com.web.productservice.model.utils.pattern.DateCreate;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-public class Product extends DateCreate<Product> {
+public class ProductDto extends DateCreate<Product> {
 
-    private String image;
+    private Image image;
 
-    @OneToOne
     private Dictionary name;
-    @OneToOne
     private Dictionary description;
-    @ManyToOne
     private Category category;
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(fetch = FetchType.EAGER)
     private List<SoftnessType> softness;
-    @ManyToMany
     private List<Materials> materials;
 
     private Double height;
@@ -31,11 +28,11 @@ public class Product extends DateCreate<Product> {
     private Boolean canBuy;
     private Boolean news;
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public Product setImage(String image) {
+    public ProductDto setImage(Image image) {
         this.image = image;
         return this;
     }
@@ -44,7 +41,7 @@ public class Product extends DateCreate<Product> {
         return name;
     }
 
-    public Product setName(Dictionary name) {
+    public ProductDto setName(Dictionary name) {
         this.name = name;
         return this;
     }
@@ -53,7 +50,7 @@ public class Product extends DateCreate<Product> {
         return description;
     }
 
-    public Product setDescription(Dictionary description) {
+    public ProductDto setDescription(Dictionary description) {
         this.description = description;
         return this;
     }
@@ -62,7 +59,7 @@ public class Product extends DateCreate<Product> {
         return category;
     }
 
-    public Product setCategory(Category category) {
+    public ProductDto setCategory(Category category) {
         this.category = category;
         return this;
     }
@@ -71,7 +68,7 @@ public class Product extends DateCreate<Product> {
         return softness;
     }
 
-    public Product setSoftness(List<SoftnessType> softness) {
+    public ProductDto setSoftness(List<SoftnessType> softness) {
         this.softness = softness;
         return this;
     }
@@ -80,7 +77,7 @@ public class Product extends DateCreate<Product> {
         return materials;
     }
 
-    public Product setMaterials(List<Materials> materials) {
+    public ProductDto setMaterials(List<Materials> materials) {
         this.materials = materials;
         return this;
     }
@@ -89,7 +86,7 @@ public class Product extends DateCreate<Product> {
         return height;
     }
 
-    public Product setHeight(Double height) {
+    public ProductDto setHeight(Double height) {
         this.height = height;
         return this;
     }
@@ -98,7 +95,7 @@ public class Product extends DateCreate<Product> {
         return weight;
     }
 
-    public Product setWeight(Double weight) {
+    public ProductDto setWeight(Double weight) {
         this.weight = weight;
         return this;
     }
@@ -107,7 +104,7 @@ public class Product extends DateCreate<Product> {
         return length;
     }
 
-    public Product setLength(Double length) {
+    public ProductDto setLength(Double length) {
         this.length = length;
         return this;
     }
@@ -116,7 +113,7 @@ public class Product extends DateCreate<Product> {
         return canBuy;
     }
 
-    public Product setCanBuy(Boolean canBuy) {
+    public ProductDto setCanBuy(Boolean canBuy) {
         this.canBuy = canBuy;
         return this;
     }
@@ -125,7 +122,7 @@ public class Product extends DateCreate<Product> {
         return news;
     }
 
-    public Product setNews(Boolean news) {
+    public ProductDto setNews(Boolean news) {
         this.news = news;
         return this;
     }
