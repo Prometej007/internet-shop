@@ -11,7 +11,8 @@ public class Materials extends DateCreate<Materials> {
     private Dictionary name;
     @OneToOne
     private Dictionary description;
-    private String image;
+    @OneToOne
+    private Image image;
 
     public Dictionary getName() {
         return name;
@@ -31,11 +32,11 @@ public class Materials extends DateCreate<Materials> {
         return this;
     }
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public Materials setImage(String image) {
+    public Materials setImage(Image image) {
         this.image = image;
         return this;
     }

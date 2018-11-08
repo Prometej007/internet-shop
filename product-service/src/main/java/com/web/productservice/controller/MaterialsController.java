@@ -1,7 +1,8 @@
 package com.web.productservice.controller;
 
-import com.web.productservice.model.Product;
-import com.web.productservice.service.ProductService;
+
+import com.web.productservice.model.Materials;
+import com.web.productservice.service.MaterialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,20 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/materials")
+public class MaterialsController {
+
 
     @Autowired
-    private ProductService productService;
-
-
-
+    private MaterialsService materialsService;
 
     @PostMapping("/create")
-    private ResponseEntity create(@RequestBody Product productDto) {
-        productService.create(productDto);
+    private ResponseEntity create(@RequestBody Materials materialsDto) {
+        materialsService.create(materialsDto);
         return ResponseEntity.ok().build();
     }
-
 
 }

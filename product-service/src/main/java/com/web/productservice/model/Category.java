@@ -12,7 +12,8 @@ import java.util.List;
 public class Category extends DateCreate<Category> {
 
 
-    private String image;
+    @OneToOne
+    private Image image;
     @Column(name = "_order")
     private Integer order;
     @OneToOne
@@ -22,11 +23,11 @@ public class Category extends DateCreate<Category> {
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public Category setImage(String image) {
+    public Category setImage(Image image) {
         this.image = image;
         return this;
     }

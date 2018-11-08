@@ -1,29 +1,26 @@
 package com.web.productservice.controller;
 
-import com.web.productservice.model.Product;
-import com.web.productservice.service.ProductService;
+import com.web.productservice.model.Category;
+import com.web.productservice.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/category")
+public class CategoryController {
 
     @Autowired
-    private ProductService productService;
+    private CategoryService categoryService;
 
 
-
-
-    @PostMapping("/create")
-    private ResponseEntity create(@RequestBody Product productDto) {
-        productService.create(productDto);
+    @GetMapping("/create")
+    private ResponseEntity create(@RequestBody Category categoryDto) {
+        categoryService.create(categoryDto);
         return ResponseEntity.ok().build();
     }
-
 
 }

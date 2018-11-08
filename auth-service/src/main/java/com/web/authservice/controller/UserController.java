@@ -17,6 +17,7 @@ public class UserController {
 
     @RequestMapping(value = "/current", method = RequestMethod.GET)
     public Principal getUser(Principal principal) {
+        System.out.println("-------getUser-------");
         System.out.println(principal.getName());
         System.out.println(principal.getName());
         System.out.println(principal.getName());

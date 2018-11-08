@@ -1,11 +1,10 @@
 package com.web.productservice.service.impl;
 
-import com.web.productservice.dto.ProductDto;
 import com.web.productservice.model.Product;
 import com.web.productservice.model.utils.pattern.LastModification;
 import com.web.productservice.repository.ProductRepository;
-import com.web.productservice.repository.proxy.ImageProxy;
 import com.web.productservice.service.DictionaryService;
+import com.web.productservice.service.ImageService;
 import com.web.productservice.service.MaterialsService;
 import com.web.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private ImageProxy imageProxy;
+ @Autowired
+ private ImageService imageService;
     @Autowired
     private DictionaryService dictionaryService;
     @Autowired
@@ -35,32 +34,27 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(rollbackFor = NullPointerException.class)
     @Override
     public Product create(Product product) {
-        return null;
-    }
-
-    @Override
-    public Product create(ProductDto productDto) {
-        return save(setLastModification(
+        return save(
                 new Product()
-                        .setImage(imageProxy.create(productDto.getImage()))
+                        .setImage(imageService.create(product.getImage()))
 
-                        .setCategory(productDto.getCategory())
+                        .setCategory(product.getCategory())
 
                         .setDateCreate(Timestamp.valueOf(LocalDateTime.now()))
 
-                        .setWeight(productDto.getWeight())
-                        .setLength(productDto.getLength())
-                        .setHeight(productDto.getHeight())
-                        .setName(dictionaryService.create(productDto.getName()))
-                        .setDescription(dictionaryService.create(productDto.getDescription()))
+                        .setWeight(product.getWeight())
+                        .setLength(product.getLength())
+                        .setHeight(product.getHeight())
+                        .setName(dictionaryService.create(product.getName()))
+                        .setDescription(dictionaryService.create(product.getDescription()))
 
-                        .setCanBuy(ofNullable(productDto.getCanBuy()).orElse(false))
-                        .setAvailable(ofNullable(productDto.getAvailable()).orElse(false))
-                        .setNews(ofNullable(productDto.getNews()).orElse(false))
+                        .setCanBuy(ofNullable(product.getCanBuy()).orElse(false))
+                        .setAvailable(ofNullable(product.getAvailable()).orElse(false))
+                        .setNews(ofNullable(product.getNews()).orElse(false))
 
-                        .setMaterials(productDto.getMaterials().stream().map(materials -> materialsService.findOne(materials)).collect(Collectors.toList()))
-                        .setSoftness(productDto.getSoftness())
-        ));
+                        .setMaterials(product.getMaterials().stream().map(materials -> materialsService.findOne(materials)).collect(Collectors.toList()))
+                        .setSoftness(product.getSoftness())
+        );
     }
 
     @Transactional(rollbackFor = NullPointerException.class)

@@ -55,23 +55,35 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
                 .authorizedGrantTypes("refresh_token", "password")
                 .scopes("ui")
                 .secret("browser")
+
                 .and()
+
                 .withClient("resource-server")
                 .secret("CONFIG_SERVICE_PASSWORD")
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("server")
+                .authorities("SERVER")
                 .and()
+
                 .withClient("product-service")
                 .secret("CONFIG_SERVICE_PASSWORD")
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("server")
+                .authorities("SERVER")
+
                 .and()
+
                 .withClient("mail-service")
                 .secret("CONFIG_SERVICE_PASSWORD")
                 .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("server").and()
+                .authorities("SERVER")
+                .scopes("server")
+
+                .and()
+
                 .withClient("order-service")
                 .secret("CONFIG_SERVICE_PASSWORD")
+                .authorities("SERVER")
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("server");
 //                .and()

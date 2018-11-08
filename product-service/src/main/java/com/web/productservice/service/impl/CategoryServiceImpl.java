@@ -4,6 +4,8 @@ import com.web.productservice.model.Category;
 import com.web.productservice.model.utils.pattern.LastModification;
 import com.web.productservice.repository.CategoryRepository;
 import com.web.productservice.service.CategoryService;
+import com.web.productservice.service.DictionaryService;
+import com.web.productservice.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,17 +19,27 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private DictionaryService dictionaryService;
+    @Autowired
+    private ImageService imageService;
 
-    @Transactional(rollbackFor = NullPointerException.class)
     @Override
-    public Category create(Category category) {
-        return save(setLastModification(category));
+    public Category create(Category categoryDto) {
+        return save(
+                new Category().setDescription(
+                        dictionaryService.create(categoryDto.getDescription())
+                )
+                        .setImage(imageService.create(categoryDto.getImage()))
+                        .setOrder(categoryDto.getOrder())
+                        .setName(categoryDto.getName())
+        );
     }
 
     @Transactional(rollbackFor = NullPointerException.class)
     @Override
     public Category save(Category category) {
-        return categoryRepository.save(category);
+        return categoryRepository.save(setLastModification(category));
     }
 
     @Override

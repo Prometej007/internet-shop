@@ -32,7 +32,9 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
     @Bean
     @ConfigurationProperties(prefix = "security.oauth2.client")
     public ClientCredentialsResourceDetails clientCredentialsResourceDetails() {
-        return new ClientCredentialsResourceDetails();
+        ClientCredentialsResourceDetails details=new ClientCredentialsResourceDetails();
+
+        return details;
     }
 
     @Bean
@@ -61,7 +63,7 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/" , "/demo").permitAll()
-                .antMatchers(HttpMethod.POST).access("#oauth2.hasScope('server')")
+//                .antMatchers(HttpMethod.POST).access("#oauth2.hasScope('server')")
                 .anyRequest().permitAll();
     }
 }

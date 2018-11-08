@@ -9,7 +9,8 @@ import java.util.List;
 @Entity
 public class Product extends DateCreate<Product> {
 
-    private String image;
+    @OneToOne
+    private Image image;
 
     @OneToOne
     private Dictionary name;
@@ -31,11 +32,11 @@ public class Product extends DateCreate<Product> {
     private Boolean canBuy;
     private Boolean news;
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public Product setImage(String image) {
+    public Product setImage(Image image) {
         this.image = image;
         return this;
     }
